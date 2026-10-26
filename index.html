@@ -79,31 +79,44 @@ footer{padding:32px 0 48px;border-top:1px solid var(--line);color:var(--muted);f
 .tx{fill:var(--text);font:600 15px var(--sans)}.tm{fill:var(--muted);font:500 13px var(--sans)}
 @media (max-width:520px){.hero{padding:60px 0 28px}body{font-size:16px}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+.case figure{margin:0 0 22px}
+.case figure svg,.case figure img{display:block;width:100%;height:auto;border-radius:14px;border:1px solid var(--line);margin:0}
+.case figcaption{font-size:14px;color:var(--muted);margin-top:8px}
+.card2{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin-bottom:18px}
+.card2 h3{font:500 22px/1.3 var(--serif);margin:0 0 6px}
+.card2 h4{font:600 15px/1.4 var(--sans);margin:14px 0 4px;color:var(--green-deep)}
+.card2 p{margin:0 0 8px}
+.kick{font-size:14px;font-weight:600;color:var(--green-deep);margin:0 0 4px}
+.resume{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:28px 30px}
+.resume h3{font:500 28px/1.2 var(--serif);margin:0 0 4px}
+.resume h4{font:600 15px/1.4 var(--sans);color:var(--green-deep);margin:18px 0 6px;border-bottom:1px solid var(--line);padding-bottom:4px}
+.resume p,.resume li{max-width:none;margin:0 0 4px;font-size:15px}
+.resume ul{margin:0;padding-left:18px}
+.rbtn{margin-bottom:18px;cursor:pointer;font-family:inherit;background:transparent}
+@media print{
+  body.printing nav,body.printing .rail,body.printing footer,body.printing #top,body.printing .sec:not(#resume),body.printing .noprint{display:none!important}
+  body.printing{background:#fff;font-size:11pt}
+  body.printing #resume{border:0;padding:0}
+  body.printing .resume{border:0;padding:0}
+  body.printing .resume p,body.printing .resume li{font-size:10.5pt}
+  @page{margin:14mm}
+}
 </style>
 </head>
 <body>
 <nav><div class="wrap" id="nav"></div></nav>
-
-<div class="wrap" id="top">
-  <header class="hero">
-    <h1 id="name"></h1>
-    <p class="lead" id="tagline"></p>
-    <div class="btns" id="heroBtns"></div>
-  </header>
-</div>
+<div class="wrap" id="top"><header class="hero"><h1 id="name"></h1><p class="lead" id="tagline"></p><div class="btns" id="heroBtns"></div></header></div>
 <div class="rail" id="rail" aria-label="Project shortcuts"></div>
-
-<div class="band" style="border-top:1px solid var(--line);margin-top:24px">
-  <div class="wrap"><section id="about" style="border-top:0"><h2>About</h2><div id="aboutText"></div></section></div>
-</div>
-
 <main class="wrap">
-  <section id="education"><h2>Education</h2><div class="edu" id="eduBox"></div></section>
-  <section id="projects"><h2>Projects</h2><div id="projBox"></div>
-    <p style="margin-top:28px"><a href="https://github.com/kaushiks2026" target="_blank" rel="noopener">See all repositories on GitHub</a></p></section>
-  <section id="achievements"><h2>Achievements</h2><div class="ach" id="achBox"></div></section>
-  <section id="skills"><h2>Skills</h2><ul class="tags" id="skillBox"></ul></section>
-  <section id="contact"><h2>Contact</h2><ul class="contact" id="contactBox"></ul></section>
+  <section class="sec" id="intro"><h2>1. Introduction</h2><div id="introText"></div></section>
+  <section class="sec" id="projects"><h2>2. Projects</h2><div id="projBox"></div><p style="margin-top:28px"><a href="https://github.com/kaushiks2026" target="_blank" rel="noopener">See all repositories on GitHub</a></p></section>
+  <section class="sec" id="teaching" hidden><h2>3. Teaching</h2><div id="teachBox"></div></section>
+  <section class="sec" id="courses"><h2>4. Classes and courses</h2><div id="courseBox"></div></section>
+  <section class="sec" id="writing"><h2>5. Sample writing</h2><div id="writeBox"></div></section>
+  <section class="sec" id="research" hidden><h2>6. Sample research paper</h2><div id="resBox"></div></section>
+  <section class="sec" id="resume"><h2 class="noprint">7. Resume</h2><button class="btn ghost rbtn noprint" id="printBtn" type="button">Print or save as PDF</button><div class="resume" id="resumeBox"></div></section>
+  <section class="sec" id="contact"><h2>Contact</h2><ul class="contact" id="contactBox"></ul></section>
 </main>
 <footer><div class="wrap" id="foot"></div></footer>
 
@@ -112,94 +125,148 @@ footer{padding:32px 0 48px;border-top:1px solid var(--line);color:var(--muted);f
    EDIT HERE. Everything on the page comes from this block.
    Change the text inside the quotes, then save. Keep the
    quotes, commas, brackets and braces exactly as they are.
+   Text in [square brackets] is a placeholder: replace it.
    ============================================================ */
 const SITE = {
   name: "Kaushik Kanniah S",
   tagline: "Cybersecurity student at VIT Vellore. I build AI-powered tools and I’m heading toward work where AI and security meet.",
 
-  about: [
-    "I’m Kaushik, a B.Tech Computer Science student specialising in Cybersecurity at VIT Vellore. I’m in the early semesters of a four-year programme, and I’m using this time to build things rather than only study them.",
-    "What pulls me in most is the point where AI and security meet: systems that understand data, spot problems early and protect people. That is the direction I want my career to take, and it shapes the projects I choose.",
-    "My projects so far are practical ones: a local document assistant built on retrieval-augmented generation, a recommender that copes with brand-new users, an audio source separator written from first principles, and a water-quality monitoring platform. I like writing the core idea myself so I understand why it works, then testing it properly.",
-    "I learn through structured plans. I’m working through a long Python mastery path, practising data structures and algorithms, and following a self-directed cybersecurity route on hands-on platforms. I also take part in hackathons, which teach me to scope an idea and ship it under time pressure.",
-    "Away from the screen I play badminton and I’m interested in content creation, especially short-form video."
+  /* 1. INTRODUCTION: three paragraphs (who, why, overview) */
+  intro: [
+    "I’m Kaushik Kanniah S, a B.Tech Computer Science and Engineering student specialising in Cybersecurity at VIT Vellore. I’m in the early semesters of a four-year programme, building a foundation in programming, mathematics and physics while learning security fundamentals.",
+    "I chose this field because the systems people rely on every day, from banking to health records, depend on both intelligent software and strong protection. I want to build AI-powered tools that can detect threats and safeguard data, and my long-term goal is a career at the intersection of artificial intelligence and cybersecurity.",
+    "This portfolio presents four of my projects with their methods and results, three courses and what I learned from them, two writing samples with cover notes, and my one-page resume."
   ],
 
-  aboutFacts: [
-    ["Studying", "B.Tech CSE (Cybersecurity), VIT Vellore"],
-    ["Focus", "AI-powered tools, applied machine learning, security fundamentals"],
-    ["Tools", "Python, FastAPI, React, Ollama, ChromaDB, SQLite"],
-    ["Looking for", "Projects and internships at the intersection of AI and security"]   // EDIT
-  ],
-
-  education: {
-    degree: "B.Tech in Computer Science and Engineering (Cybersecurity)",
-    school: "Vellore Institute of Technology, Vellore",
-    years: "2026 – 2030"                         // EDIT: confirm your years
-  },
-
-  /* art options: bubble, unmix, hybrid, aqua */
+  /* 2. PROJECTS. For a real photograph or screenshot, put the image in an
+     "images" folder in your GitHub repo and set photo: "images/yourfile.png".
+     If photo is empty, an illustration is shown instead. art options: bubble, unmix, hybrid, aqua */
   projects: [
     {
-      id: "bubblehead", art: "bubble", title: "BubbleHead",
-      summary: "A fully local RAG app that answers questions from your own documents, with nothing leaving your machine.",
-      results: [
-        "ChromaDB vector search with BM25 reranking",
-        "Retry loop that refines low-confidence queries",
-        "Reads PDF, DOCX, PPTX, TXT, HTML and CSV"
+      id: "watchparty", art: "watch", photo: "images/wp.png", caption: "A shared room where playback, chat and polls stay in sync.",
+      title: "WatchParty",
+      about: "A real-time platform where friends watch videos together with synchronised playback, live chat, reactions, polls and shared playlists.",
+      methods: [
+        "Rooms hold up to 50 people and are joined with a 6-character invite code; the host controls playback, and the role passes on automatically if the host leaves",
+        "Vector clocks order playback events so stale updates are dropped",
+        "A heartbeat every 3 seconds checks each viewer, and a client that drifts more than 500 ms is corrected automatically",
+        "Chat, reactions, playlist voting, group polls and fuzzy movie search are built on the same room"
       ],
-      outcome: "A private, offline document assistant running on Ollama models.",
-      lessons: "Retrieval quality matters more than model size; reranking and a retry step fixed more weak answers than prompt changes.",
-      tags: ["Python", "FastAPI", "ChromaDB", "Ollama"],
-      links: [["Source on GitHub", "https://github.com/kaushiks2026/BubbleHead"]]
+      results: [
+        "Playback stays in step across all participants in a room",
+        "A full social viewing experience: chat, polls and a voted playlist"
+      ],
+      tags: ["JavaScript", "Real-time", "Synchronisation"],
+      links: [["Source on GitHub", "https://github.com/kaushiks2026/WatchParty"]]
     },
     {
-      id: "unmix", art: "unmix", title: "Unmix the Signal",
-      summary: "FastICA written from scratch to separate blended audio back into its original sources, with no ICA library.",
+      id: "unmix", art: "unmix", photo: "images/unmix.png", caption: "Mixed recordings go in; FastICA separates the original sources.",
+      title: "Unmix the Signal",
+      about: "FastICA written from scratch to separate blended audio recordings back into their original sources, without any ICA or source-separation library.",
+      methods: [
+        "Mixed recordings are centred and whitened, then FastICA’s fixed-point iterations extract independent components",
+        "A PCA baseline is run on the same mixtures for comparison",
+        "Quality is measured with SI-SDR and the Amari index on speech, music and ambient audio"
+      ],
       results: [
         "Mean SI-SDR of +52.11 dB, against +4.54 dB for PCA",
-        "Amari index 0.0046 against 0.8127 for PCA (0 is perfect)",
-        "10 of 10 tests passing on speech, music and ambient audio"
+        "Amari index of 0.0046, against 0.8127 for PCA (0 is perfect unmixing)",
+        "10 of 10 tests passing"
       ],
-      outcome: "A verified demonstration that ICA recovers sources where PCA cannot.",
-      lessons: "PCA only removes correlation; real separation needs higher-order statistics, and coding it by hand made that clear.",
       tags: ["Python", "NumPy", "Signal processing"],
       links: [["Source on GitHub", "https://github.com/kaushiks2026/UnMixtheSignal"]]
     },
     {
-      id: "hybrid", art: "hybrid", title: "Hybrid Recommendation Engine",
-      summary: "A movie recommender on MovieLens 1M that blends SVD collaborative filtering with TF-IDF content filtering.",
-      results: [
-        "Blend weight adapts to each user: α = min(ratings ÷ threshold, 1)",
-        "New users get content-based picks, experienced users collaborative ones",
-        "MMR re-ranking keeps results diverse"
+      id: "hybrid", art: "hybrid", photo: "", caption: "The blend weight α grows as a user rates more movies.",
+      title: "Hybrid Recommendation Engine",
+      about: "A movie recommender built on the MovieLens 1M dataset that combines collaborative and content-based filtering so it still works for brand-new users.",
+      methods: [
+        "SVD on the user–movie rating matrix gives collaborative scores",
+        "TF-IDF on movie genres gives content-based similarity",
+        "The two are blended with a weight that adapts to each user: α = min(ratings ÷ threshold, 1)",
+        "MMR re-ranking keeps the final list diverse"
       ],
-      outcome: "A recommender that degrades gracefully when a user has little history.",
-      lessons: "A fixed 50/50 blend ignores how much is known about a user; tying the weight to rating count fixes that simply.",
+      results: [
+        "New users receive content-based picks; experienced users receive collaborative ones",
+        "The system degrades gracefully when a user has little history"
+      ],
       tags: ["Python", "SVD", "TF-IDF", "MovieLens"],
       links: [["Source on GitHub", "https://github.com/kaushiks2026/Hybrid-Recommendation-Engine"]]
     },
     {
-      id: "aquawatch", art: "aqua", title: "AquaWatch",
-      summary: "A local-first water quality monitoring and early-warning platform for a multidisciplinary engineering team.",
-      results: [
-        "FastAPI backend, SQLite storage and a live dashboard",
-        "Sensor simulator that produces realistic readings and spikes",
-        "Automated pytest suite and Swagger API docs"
+      id: "aquawatch", art: "aqua", photo: "images/aw.png", caption: "From sensor reading to dashboard alert.",
+      title: "AquaWatch",
+      about: "A local-first water quality monitoring and early-warning platform, built as the software side of a multidisciplinary engineering project.",
+      methods: [
+        "Sensor readings (from an ESP32 or a built-in simulator) are sent to a FastAPI backend and stored in SQLite",
+        "A web dashboard plots live readings and raises an alert when a value crosses its safe limit",
+        "A pytest suite tests the API, and Swagger provides interactive documentation"
       ],
-      outcome: "An end-to-end pipeline from sensor reading to alert, demonstrable without hardware.",
-      lessons: "Building a simulator early let the software be tested before the hardware was ready.",
+      results: [
+        "A working pipeline from reading to alert that can be demonstrated without hardware",
+        "The simulator produces realistic readings, including spikes, for testing"
+      ],
       tags: ["Python", "FastAPI", "SQLite", "IoT"],
       links: [["Source on GitHub", "https://github.com/kaushiks2026/Water-Quality-Monitor"]]
     }
   ],
 
-  achievements: [
-    { title: "Code2Create 7.0 (ACM-VIT)", text: "Submitted Lab e-Record Generator to the AI Solutions track." },
-    { title: "VinHack", text: "Submitted a project to the Trust, Safety and Digital Security track." }
+  /* 3. TEACHING (optional). Leave as [] to hide the section.
+     Example item: { title: "Peer tutoring", text: "What you taught and to whom." } */
+  teaching: [],
+
+  /* 4. COURSES: three important courses at VIT */
+  courses: [
+    {
+      title: "Engineering Physics",
+      covered: "An introduction to quantum mechanics, its mathematical foundation and its applications.",
+      skills: "Looking at natural phenomena from a new perspective, and a stronger curiosity about how quantum mechanics makes sense.",
+      knowledge: "Quantum mechanics and its applications, and the mathematical foundation needed to approach it."
+    },
+    {
+      title: "Multivariable Calculus and Differential Equations",
+      covered: "Calculus in several variables and the methods for solving differential equations.",
+      skills: "Solving a problem by breaking it into clear steps.",
+      knowledge: "Multiple integrals, vector differentiation and the three major vector calculus theorems (Green’s, Stokes’ and Gauss’s divergence), and solving second-order differential equations and related types."   // EDIT: confirm the theorems
+    },
+    {
+      title: "Programming in Python",   // EDIT: replace with your third course if different
+      covered: "A broad introduction to programming in Python: data types, control flow, functions, modules, file handling, error handling and the basics of object-oriented design.",
+      skills: "Turning a problem into a program, writing readable code, debugging errors and testing that the code works.",
+      knowledge: "How Python handles data and structures programs, which is the base for my projects and my self-study of data structures and algorithms."
+    }
   ],
 
+  /* 5. SAMPLE WRITING: one English and one subject assignment, each with a cover page.
+     Add a file to your repo (for example "writing/english.pdf") and set file: "writing/english.pdf". */
+  writing: [
+    {
+      kind: "English assignment",
+      title: "Textual Analysis of a Short Story",   // EDIT: add the name of the story
+      what: "A close reading of a short story, looking at how its elements work together to create meaning: plot, character, setting, point of view, symbolism and tone.",
+      why: "It shows that I can read closely, appreciate an author’s craft, support an argument with evidence from the text, and write about it in a clear, structured way.",
+      file: ""
+    },
+    {
+      kind: "Subject assignment (Mathematics)",
+      title: "Temperature Variation with Time Using Newton’s Law of Cooling",
+      what: "An assignment that uses Newton’s law of cooling to find how an object’s temperature changes with time, solving the differential equation and computing the result in GNU Octave.",
+      why: "It shows that I can model a real situation with a differential equation, solve it, implement it in code and interpret the result.",
+      file: ""
+    }
+  ],
+
+  /* 6. SAMPLE RESEARCH PAPER (optional). Leave as [] to hide the section.
+     Example item: { title: "Paper title", text: "One-line summary", file: "papers/paper.pdf" } */
+  research: [],
+
+  /* 7. RESUME (built from the data above) */
   skills: ["Python", "FastAPI", "React", "JavaScript", "Machine learning", "RAG with Ollama", "SQLite", "Data structures", "Cybersecurity fundamentals", "Git"],
+  education: { degree: "B.Tech in Computer Science and Engineering (Cybersecurity)", school: "Vellore Institute of Technology, Vellore", years: "2026 – 2030" },   // EDIT: confirm years
+  achievements: [
+    { title: "Code2Create 7.0 (ACM-VIT)", text: "Submitted Lab e-Record Generator, an AI tool for structuring lab records, to the AI Solutions track." },
+    { title: "VinHack", text: "Submitted a project to the Trust, Safety and Digital Security track." }
+  ],
 
   contact: [
     { label: "Email",    value: "kaushikkanniah.s2026@vitstudent.ac.in", href: "mailto:kaushikkanniah.s2026@vitstudent.ac.in" },
@@ -212,7 +279,7 @@ const SITE = {
 (function(){
   const $ = id => document.getElementById(id);
   const el = (tag, props, kids) => { const n = document.createElement(tag); Object.assign(n, props||{}); (kids||[]).forEach(k=>n.appendChild(k)); return n; };
-
+  const list = (items) => { const u = el("ul"); items.forEach(i => u.appendChild(el("li", { textContent:i }))); return u; };
   /* ---- graphics: small inline SVG scenes, drawn with the page palette ---- */
   const wave = (y,a,f,ph,x0,x1) => { let d=""; for(let x=x0;x<=x1;x+=4){ d+=(x===x0?"M":"L")+x+" "+(y+a*Math.sin((x-x0)*f+ph)).toFixed(1)+" "; } return d; };
   const box = (x,y,w,h,t,cls) => `<rect class="${cls||'cd'}" x="${x}" y="${y}" width="${w}" height="${h}" rx="10"/><text class="tx" x="${x+w/2}" y="${y+h/2+5}" text-anchor="middle">${t}</text>`;
@@ -275,17 +342,18 @@ const SITE = {
   };
   const art = (key, label) => { const d = document.createElement("div"); d.innerHTML = `<svg viewBox="0 0 640 360" role="img" aria-label="${label}" xmlns="http://www.w3.org/2000/svg">${ART[key]()}</svg>`; return d.firstChild; };
 
+
   document.title = SITE.name + " – Portfolio";
   $("name").textContent = SITE.name;
   $("tagline").textContent = SITE.tagline;
 
   const nav = $("nav");
-  nav.appendChild(el("a", { className:"brand", href:"#top", textContent: "Portfolio" }));
-  [["About","#about"],["Projects","#projects"],["Achievements","#achievements"],["Skills","#skills"],["Contact","#contact"]]
+  nav.appendChild(el("a", { className:"brand", href:"#top", textContent:"Portfolio" }));
+  [["Introduction","#intro"],["Projects","#projects"],["Courses","#courses"],["Writing","#writing"],["Resume","#resume"],["Contact","#contact"]]
     .forEach(([t,h]) => nav.appendChild(el("a", { href:h, textContent:t })));
 
   $("heroBtns").appendChild(el("a", { className:"btn primary", href:"#projects", textContent:"See my projects" }));
-  $("heroBtns").appendChild(el("a", { className:"btn ghost", href:"#contact", textContent:"Get in touch" }));
+  $("heroBtns").appendChild(el("a", { className:"btn ghost", href:"#resume", textContent:"View resume" }));
 
   SITE.projects.forEach(p => {
     const tile = el("a", { className:"tile", href:"#"+p.id });
@@ -293,32 +361,74 @@ const SITE = {
     $("rail").appendChild(tile);
   });
 
-  SITE.about.forEach(t => $("aboutText").appendChild(el("p", { textContent:t })));
-  const facts = el("div", { className:"facts" });
-  SITE.aboutFacts.forEach(([k,v]) => { const r = el("div"); r.appendChild(el("span", { textContent:k })); r.appendChild(el("span", { textContent:v })); facts.appendChild(r); });
-  $("aboutText").appendChild(facts);
-
-  const e = SITE.education;
-  $("eduBox").appendChild(el("strong", { textContent:e.degree }));
-  $("eduBox").appendChild(el("span", { textContent:e.school }));
-  $("eduBox").appendChild(el("span", { className:"muted", textContent:e.years }));
+  SITE.intro.forEach(t => $("introText").appendChild(el("p", { textContent:t })));
 
   SITE.projects.forEach(p => {
     const c = el("article", { className:"case", id:p.id });
-    c.appendChild(art(p.art, p.title + " illustration"));
+    const fig = el("figure");
+    if (p.photo) fig.appendChild(el("img", { src:p.photo, alt:p.title + " screenshot", loading:"lazy" })); else fig.appendChild(art(p.art, p.title + " illustration"));
+    if (p.caption) fig.appendChild(el("figcaption", { textContent:p.caption }));
+    c.appendChild(fig);
     c.appendChild(el("h3", { textContent:p.title }));
-    c.appendChild(el("p", { textContent:p.summary }));
-    c.appendChild(el("h4", { textContent:"Key results" }));
-    const ul = el("ul"); p.results.forEach(r => ul.appendChild(el("li", { textContent:r }))); c.appendChild(ul);
-    c.appendChild(el("h4", { textContent:"Outcome" })); c.appendChild(el("p", { textContent:p.outcome }));
-    c.appendChild(el("h4", { textContent:"What I learned" })); c.appendChild(el("p", { textContent:p.lessons }));
-    if (p.links.length) { const lp = el("p"); p.links.forEach(([t,h],i) => { if(i) lp.appendChild(document.createTextNode("  ")); lp.appendChild(el("a", { href:h, target:"_blank", rel:"noopener", textContent:t })); }); c.appendChild(lp); }
+    c.appendChild(el("h4", { textContent:"What it is" })); c.appendChild(el("p", { textContent:p.about }));
+    c.appendChild(el("h4", { textContent:"How I built it" })); c.appendChild(list(p.methods));
+    c.appendChild(el("h4", { textContent:"Results" })); c.appendChild(list(p.results));
+    if (p.links.length) { const lp = el("p", { style:"margin-top:14px" }); p.links.forEach(([t,h]) => lp.appendChild(el("a", { href:h, target:"_blank", rel:"noopener", textContent:t }))); c.appendChild(lp); }
     const tg = el("ul", { className:"tags" }); p.tags.forEach(t => tg.appendChild(el("li", { textContent:t }))); c.appendChild(tg);
     $("projBox").appendChild(c);
   });
 
-  SITE.achievements.forEach(a => { const d = el("div"); d.appendChild(el("strong", { textContent:a.title })); d.appendChild(el("span", { className:"muted", textContent:a.text })); $("achBox").appendChild(d); });
-  SITE.skills.forEach(s => $("skillBox").appendChild(el("li", { textContent:s })));
+  const simple = (items, box, sec) => {
+    if (!items || !items.length) return;
+    $(sec).hidden = false;
+    items.forEach(i => {
+      const d = el("div", { className:"card2" });
+      d.appendChild(el("h3", { textContent:i.title })); d.appendChild(el("p", { textContent:i.text }));
+      if (i.file) d.appendChild(el("a", { href:i.file, target:"_blank", rel:"noopener", textContent:"Open file" }));
+      $(box).appendChild(d);
+    });
+  };
+  simple(SITE.teaching, "teachBox", "teaching");
+  simple(SITE.research, "resBox", "research");
+
+  SITE.courses.forEach(c => {
+    const d = el("div", { className:"card2" });
+    d.appendChild(el("h3", { textContent:c.title }));
+    d.appendChild(el("h4", { textContent:"What it covered" })); d.appendChild(el("p", { textContent:c.covered }));
+    d.appendChild(el("h4", { textContent:"Skills I gained" })); d.appendChild(el("p", { textContent:c.skills }));
+    d.appendChild(el("h4", { textContent:"Subject knowledge" })); d.appendChild(el("p", { textContent:c.knowledge }));
+    $("courseBox").appendChild(d);
+  });
+
+  SITE.writing.forEach(w => {
+    const d = el("div", { className:"card2" });
+    d.appendChild(el("p", { className:"kick", textContent:w.kind }));
+    d.appendChild(el("h3", { textContent:w.title }));
+    d.appendChild(el("h4", { textContent:"What this assignment is" })); d.appendChild(el("p", { textContent:w.what }));
+    d.appendChild(el("h4", { textContent:"Why it showcases my skills" })); d.appendChild(el("p", { textContent:w.why }));
+    if (w.file) d.appendChild(el("a", { href:w.file, target:"_blank", rel:"noopener", textContent:"Read the assignment" }));
+    $("writeBox").appendChild(d);
+  });
+
+  /* resume */
+  const R = $("resumeBox"), e = SITE.education;
+  const rh = t => R.appendChild(el("h4", { textContent:t }));
+  R.appendChild(el("h3", { textContent:SITE.name }));
+  R.appendChild(el("p", { textContent:SITE.contact.map(c => c.value).join("  ·  ") }));
+  rh("Education");
+  R.appendChild(el("p", { textContent:e.degree + ", " + e.school + " (" + e.years + ")" }));
+  rh("Projects");
+  R.appendChild(list(SITE.projects.map(p => p.title + ": " + p.about)));
+  rh("Courses");
+  R.appendChild(list(SITE.courses.map(c => c.title)));
+  rh("Achievements");
+  R.appendChild(list(SITE.achievements.map(a => a.title + ": " + a.text)));
+  rh("Skills");
+  R.appendChild(el("p", { textContent:SITE.skills.join(", ") }));
+
+  $("printBtn").addEventListener("click", () => { document.body.classList.add("printing"); window.print(); });
+  window.addEventListener("afterprint", () => document.body.classList.remove("printing"));
+
   SITE.contact.forEach(c => { const li = el("li"); li.appendChild(el("span", { textContent:c.label })); li.appendChild(el("a", { href:c.href, target:c.href.startsWith("mailto:")?"_self":"_blank", rel:"noopener", textContent:c.value })); $("contactBox").appendChild(li); });
   $("foot").textContent = "© " + new Date().getFullYear() + " " + SITE.name;
 })();
